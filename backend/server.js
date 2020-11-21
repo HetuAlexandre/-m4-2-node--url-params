@@ -4,13 +4,16 @@
 const express = require("express");
 const morgan = require("morgan");
 
+const { top50 } = require('./data/top50');
+
+
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
 
   // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
   .use(morgan("tiny"))
-  .use(bodyParser.json())
+  .use(express.json())
 
   // Any requests for static files will go into the public folder
   .use(express.static("public"))
@@ -18,6 +21,13 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
+  
+  .get("/top50", (req, res) => {
+    res.status(200).json({
+      status:200,
+      data: [...top50]
+    });
+  })
 
   // add new endpoints here ☝️
   // ---------------------------------
