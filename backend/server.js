@@ -21,9 +21,7 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
-  // .get(`top50/artist/drake`, (req, res) => {
 
-  // })
 
 
 
@@ -42,15 +40,6 @@ express()
       status: 202,  
       data : [...specificSong] 
     });
-
-    // requestSong.length === 0 ? res.status(404).json({ 
-    //   status: 404, 
-    //   data: "Song not found." }):
-    //   res.status(200).json({
-    //   status:200,
-    //   data : [...specificSong]
-    // });
-    
   })
 
 
