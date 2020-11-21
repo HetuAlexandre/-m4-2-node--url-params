@@ -21,7 +21,15 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
-  
+  .get("/top50/song/:rank", (req, res) => {
+    const specificSong =  top50.filter((song)=> {
+    return song.rank.toString() === req.params.rank
+    })
+      res.status(200).json({
+      status:200,
+      data : [...specificSong]
+    });
+  })
   .get("/top50", (req, res) => {
     res.status(200).json({
       status:200,
