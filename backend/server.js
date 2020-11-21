@@ -21,15 +21,39 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
+  // .get(`top50/artist/drake`, (req, res) => {
+
+  // })
+
+
+
+
+
   .get("/top50/song/:rank", (req, res) => {
     const specificSong =  top50.filter((song)=> {
     return song.rank.toString() === req.params.rank
     })
-      res.status(200).json({
-      status:200,
-      data : [...specificSong]
+    specificSong.length === 0 ? 
+    res.status(404).json({
+      status: 404, 
+      data: "This is obviously not what you are looking for." 
+    }):
+      res.status(202).json({
+      status: 202,  
+      data : [...specificSong] 
     });
+
+    // requestSong.length === 0 ? res.status(404).json({ 
+    //   status: 404, 
+    //   data: "Song not found." }):
+    //   res.status(200).json({
+    //   status:200,
+    //   data : [...specificSong]
+    // });
+    
   })
+
+
   .get("/top50", (req, res) => {
     res.status(200).json({
       status:200,
