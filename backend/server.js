@@ -22,6 +22,39 @@ express()
   // ---------------------------------
   // add new endpoints here 👇
 
+  .get("/top50/popular-artist", (req, res) => {
+    const specificArtist =  top50.filter((artist)=> {
+    return artist.artist.toLowerCase() === req.params.artist
+    })
+    specificArtist.length === 0 ? 
+    res.status(404).json({
+      status: 404, 
+      data: "Artist not found." 
+    }):
+      res.status(200).json({
+      status: 200,  
+      data : [...specificArtist] 
+    });
+  })
+
+
+  .get("/top50/artist/:artist", (req, res) => {
+    const specificArtist =  top50.filter((artist)=> {
+    return artist.artist.toLowerCase() === req.params.artist
+    })
+    specificArtist.length === 0 ? 
+    res.status(404).json({
+      status: 404, 
+      data: "Artist not found." 
+    }):
+      res.status(200).json({
+      status: 200,  
+      data : [...specificArtist] 
+    });
+  })
+
+
+
   .get("/top50/song/:rank", (req, res) => {
     const specificSong =  top50.filter((song)=> {
     return song.rank.toString() === req.params.rank
@@ -31,8 +64,8 @@ express()
       status: 404, 
       data: "Song not found." 
     }):
-      res.status(202).json({
-      status: 202,  
+      res.status(200).json({
+      status: 200,  
       data : [...specificSong] 
     });
   })
