@@ -23,19 +23,20 @@ express()
   // add new endpoints here 👇
 
   .get("/top50/popular-artist", (req, res) => {
-    const specificArtist =  top50.filter((artist)=> {
-    return artist.artist.toLowerCase() === req.params.artist
-    })
-    specificArtist.length === 0 ? 
-    res.status(404).json({
-      status: 404, 
-      data: "Artist not found." 
-    }):
-      res.status(200).json({
+  const countSong = {};
+  top50.forEach((song) => {
+    countSong[song.artist] = countSong[song.artist] === undefined ? [song] : [...countSong[song.artist], song];
+  });
+
+  let newArr = Object.keys(countSong).sort(function(a,b){
+    return countSong[a].length - countSong[b].length;
+  });
+    newArr = newArr.reverse(); 
+    res.status(200).json({
       status: 200,  
-      data : [...specificArtist] 
-    });
-  })
+      data : countSong[newArr[0]]
+    });  
+})
 
 
   .get("/top50/artist/:artist", (req, res) => {
