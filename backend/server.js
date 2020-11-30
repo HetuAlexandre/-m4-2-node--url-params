@@ -21,6 +21,16 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
+  .get('/top50/artist',(req,res)=> { 
+    const setArtists = new Set(); 
+    top50.map((name)=> {
+      setArtists.add(name.artist);
+    }); 
+    res.status(200).json({
+      status: 200,
+      data: [...setArtists],
+    });
+  })
 
   .get("/top50/popular-artist", (req, res) => {
   const countSong = {};
